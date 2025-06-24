@@ -7,10 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, CheckCircle } from "lucide-react";
 import { ConsentText } from "@/components/ConsentText";
 import { MyIDIntegration } from "@/components/MyIDIntegration";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Index = () => {
   const [isConsentChecked, setIsConsentChecked] = useState(false);
   const [isStartingIdentification, setIsStartingIdentification] = useState(false);
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleStartIdentification = async () => {
@@ -18,11 +21,9 @@ const Index = () => {
     
     setIsStartingIdentification(true);
     
-    // Запуск MyID WebSDK
     try {
       const myIdResult = await MyIDIntegration.startIdentification();
       if (myIdResult.success) {
-        // Перенаправление будет обработано через MyID callback
         console.log("MyID идентификация начата успешно");
       }
     } catch (error) {
@@ -34,14 +35,19 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="container mx-auto px-4 py-8">
+        {/* Language switcher */}
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
+
         {/* Заголовок */}
         <div className="text-center mb-8">
           <div className="flex justify-center items-center gap-3 mb-4">
             <Shield className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Ident Score</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t('app.title')}</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Безопасная идентификация личности и получение кредитного скоринга
+            {t('app.subtitle')}
           </p>
         </div>
 
@@ -50,7 +56,7 @@ const Index = () => {
           <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-2xl text-gray-800">
-                Согласие на прохождение идентификации и скоринга
+                {t('consent.title')}
               </CardTitle>
             </CardHeader>
             
@@ -70,9 +76,7 @@ const Index = () => {
                   htmlFor="consent" 
                   className="text-sm text-gray-700 cursor-pointer leading-relaxed"
                 >
-                  Я ознакомился с условиями обработки персональных данных и даю согласие 
-                  на прохождение идентификации через MyID, а также на получение кредитного 
-                  скоринга из внешних источников KATM и E-GOV.
+                  {t('consent.checkbox')}
                 </label>
               </div>
 
@@ -80,15 +84,15 @@ const Index = () => {
               <div className="grid md:grid-cols-3 gap-4 my-8">
                 <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                  <span className="text-sm text-blue-800">Быстрая идентификация</span>
+                  <span className="text-sm text-blue-800">{t('features.fast')}</span>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
-                  <span className="text-sm text-green-800">Безопасность данных</span>
+                  <span className="text-sm text-green-800">{t('features.secure')}</span>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-purple-600 flex-shrink-0" />
-                  <span className="text-sm text-purple-800">Автоматический скоринг</span>
+                  <span className="text-sm text-purple-800">{t('features.automatic')}</span>
                 </div>
               </div>
 
@@ -103,16 +107,16 @@ const Index = () => {
                   {isStartingIdentification ? (
                     <>
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Запуск идентификации...
+                      {t('starting.identification')}
                     </>
                   ) : (
-                    "Продолжить"
+                    t('continue')
                   )}
                 </Button>
                 
                 {!isConsentChecked && (
                   <p className="text-sm text-gray-500 mt-2">
-                    Отметьте согласие для продолжения
+                    {t('consent.required')}
                   </p>
                 )}
               </div>
@@ -123,8 +127,7 @@ const Index = () => {
         {/* Информация о безопасности */}
         <div className="max-w-2xl mx-auto mt-8 text-center">
           <p className="text-sm text-gray-500">
-            Ваши данные защищены в соответствии с требованиями 
-            законодательства Республики Узбекистан о персональных данных
+            {t('security.info')}
           </p>
         </div>
       </div>
