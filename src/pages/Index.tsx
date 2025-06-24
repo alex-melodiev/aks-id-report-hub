@@ -6,30 +6,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, CheckCircle } from "lucide-react";
 import { ConsentText } from "@/components/ConsentText";
-import { MyIDIntegration } from "@/components/MyIDIntegration";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Index = () => {
   const [isConsentChecked, setIsConsentChecked] = useState(false);
-  const [isStartingIdentification, setIsStartingIdentification] = useState(false);
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const handleStartIdentification = async () => {
+  const handleStartIdentification = () => {
     if (!isConsentChecked) return;
-    
-    setIsStartingIdentification(true);
-    
-    try {
-      const myIdResult = await MyIDIntegration.startIdentification();
-      if (myIdResult.success) {
-        console.log("MyID идентификация начата успешно");
-      }
-    } catch (error) {
-      console.error("Ошибка при запуске MyID:", error);
-      setIsStartingIdentification(false);
-    }
+    navigate('/thank-you');
   };
 
   return (
@@ -100,18 +87,11 @@ const Index = () => {
               <div className="text-center pt-6">
                 <Button
                   onClick={handleStartIdentification}
-                  disabled={!isConsentChecked || isStartingIdentification}
+                  disabled={!isConsentChecked}
                   className="px-8 py-3 text-lg bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300"
                   size="lg"
                 >
-                  {isStartingIdentification ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      {t('starting.identification')}
-                    </>
-                  ) : (
-                    t('continue')
-                  )}
+                  {t('continue')}
                 </Button>
                 
                 {!isConsentChecked && (
