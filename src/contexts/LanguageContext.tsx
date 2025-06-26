@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'ru' | 'uz';
@@ -15,43 +14,55 @@ const translations = {
   ru: {
     // Main page
     'app.title': 'Ident Score',
-    'app.subtitle': 'Безопасная идентификация личности',
-    'consent.title': 'Согласие на прохождение идентификации',
-    'consent.checkbox': 'Я ознакомился с условиями обработки персональных данных и даю согласие на прохождение идентификации через MyID.',
+    'app.subtitle': 'Сервис идентификации личности',
+    'app.description': 'Быстрая и безопасная система идентификации личности',
+    'consent.title': 'Согласие на обработку персональных данных',
+    'consent.description': 'Ознакомьтесь с условиями и дайте согласие на прохождение идентификации',
+    'consent.checkbox': 'Ознакомьтесь с Заявлением на Согласия обработку персональных данных; передачу персональных данных третьим лицам; предоставление кредитного отчета о себе.',
     'continue': 'Продолжить',
     'consent.required': 'Отметьте согласие для продолжения',
     'starting.identification': 'Запуск идентификации...',
     'security.info': 'Ваши данные защищены в соответствии с требованиями законодательства Республики Узбекистан о персональных данных',
     'features.fast': 'Быстрая идентификация',
+    'features.fast.description': 'Процесс занимает всего 30 секунд',
     'features.secure': 'Безопасность данных',
+    'features.secure.description': 'Максимальная защита ваших данных',
     'features.automatic': 'Автоматическая обработка',
+    'features.automatic.description': 'Полностью автоматизированный процесс',
     
     // Thank you page
     'thanks.title': 'Спасибо за идентификацию!',
     'thanks.subtitle': 'Ваша личность успешно подтверждена через MyID',
     'thanks.success': '✅ Идентификация завершена успешно',
     'thanks.contact': 'Возникли вопросы? Обратитесь в службу поддержки:',
+    'thanks.help.title': 'Нужна помощь?',
     'home': 'На главную'
   },
   uz: {
     // Main page
     'app.title': 'Ident Score',
     'app.subtitle': 'Shaxsni xavfsiz identifikatsiya qilish',
+    'app.description': 'Tez va xavfsiz shaxsni identifikatsiya qilish tizimi',
     'consent.title': 'Identifikatsiyadan o\'tishga rozilik',
+    'consent.description': 'Shartlarni o\'qing va identifikatsiyadan o\'tishga rozilik bering',
     'consent.checkbox': 'Men shaxsiy ma\'lumotlarni qayta ishlash shartlari bilan tanishdim va MyID orqali identifikatsiyadan o\'tishga roziman.',
     'continue': 'Davom etish',
     'consent.required': 'Davom etish uchun rozilikni belgilang',
     'starting.identification': 'Identifikatsiya boshlanmoqda...',
     'security.info': 'Sizning ma\'lumotlaringiz O\'zbekiston Respublikasi shaxsiy ma\'lumotlar to\'g\'risidagi qonunchilik talablariga muvofiq himoyalangan',
     'features.fast': 'Tez identifikatsiya',
+    'features.fast.description': 'Jarayon atigi 30 soniya davom etadi',
     'features.secure': 'Ma\'lumotlar xavfsizligi',
+    'features.secure.description': 'Ma\'lumotlaringizning maksimal himoyasi',
     'features.automatic': 'Avtomatik qayta ishlash',
+    'features.automatic.description': 'To\'liq avtomatlashtirilgan jarayon',
     
     // Thank you page
     'thanks.title': 'Identifikatsiya uchun rahmat!',
     'thanks.subtitle': 'Sizning shaxsingiz MyID orqali muvaffaqiyatli tasdiqlandi',
     'thanks.success': '✅ Identifikatsiya muvaffaqiyatli yakunlandi',
     'thanks.contact': 'Savollaringiz bormi? Qo\'llab-quvvatlash xizmatiga murojaat qiling:',
+    'thanks.help.title': 'Yordam kerakmi?',
     'home': 'Bosh sahifa'
   }
 };

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,14 +34,14 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="py-10 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
               {t('app.subtitle')}
             </h2>
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-              Быстрая и безопасная система идентификации личности для современного мира
+              {t('app.description')}
             </p>
             
             {/* Features Grid */}
@@ -52,7 +51,7 @@ const Index = () => {
                   <CheckCircle className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('features.fast')}</h3>
-                <p className="text-gray-600">Процесс занимает всего несколько минут</p>
+                <p className="text-gray-600">{t('features.fast.description')}</p>
               </div>
               
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
@@ -60,7 +59,7 @@ const Index = () => {
                   <Shield className="h-8 w-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('features.secure')}</h3>
-                <p className="text-gray-600">Максимальная защита ваших данных</p>
+                <p className="text-gray-600">{t('features.secure.description')}</p>
               </div>
               
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
@@ -68,7 +67,7 @@ const Index = () => {
                   <CheckCircle className="h-8 w-8 text-purple-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('features.automatic')}</h3>
-                <p className="text-gray-600">Полностью автоматизированный процесс</p>
+                <p className="text-gray-600">{t('features.automatic.description')}</p>
               </div>
             </div>
           </div>
@@ -76,7 +75,7 @@ const Index = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="bg-white rounded-3xl shadow-2xl border-0 overflow-hidden">
@@ -85,18 +84,18 @@ const Index = () => {
                   {t('consent.title')}
                 </CardTitle>
                 <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-                  Ознакомьтесь с условиями и дайте согласие на прохождение идентификации
+                  {t('consent.description')}
                 </p>
               </CardHeader>
               
-              <CardContent className="p-12">
+              <CardContent className="p-6">
                 {/* Текст согласия */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <ConsentText />
                 </div>
                 
                 {/* Чекбокс согласия */}
-                <div className="flex items-start space-x-4 p-6 bg-blue-50 rounded-2xl border-2 border-blue-100 mb-8">
+                <div className="flex items-start space-x-2 sm:space-x-4 p-3 sm:p-6 bg-blue-50 rounded-lg sm:rounded-2xl border border-blue-100 sm:border-2 mb-8">
                   <Checkbox
                     id="consent"
                     checked={isConsentChecked}
@@ -105,7 +104,7 @@ const Index = () => {
                   />
                   <label 
                     htmlFor="consent" 
-                    className="text-gray-700 cursor-pointer leading-relaxed font-medium"
+                    className="text-gray-700 cursor-pointer text-sm sm:text-base leading-tight font-medium"
                   >
                     {t('consent.checkbox')}
                   </label>

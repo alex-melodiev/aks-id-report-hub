@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -89,7 +88,7 @@ const ThankYou = () => {
             {/* Contact Information */}
             <div className="mt-12 p-8 bg-white rounded-2xl shadow-lg border border-gray-100">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Нужна помощь?
+                {t('thanks.help.title')}
               </h3>
               <p className="text-gray-600 mb-4">
                 {t('thanks.contact')}
