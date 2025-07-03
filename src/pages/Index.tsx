@@ -15,7 +15,7 @@ const Index = () => {
 
   const handleStartIdentification = () => {
     if (!isConsentChecked) return;
-    navigate('/thank-you');
+    navigate('/phone-input');
   };
 
   return (

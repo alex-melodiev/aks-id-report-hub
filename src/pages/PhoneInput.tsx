@@ -1,0 +1,112 @@
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, Phone, ArrowRight, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+const PhoneInput = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phoneNumber.trim()) return;
+
+    setIsLoading(true);
+    // Имитация отправки SMS
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/otp-verification', { state: { phoneNumber } });
+    }, 1000);
+  };
+
+  const handleBack = () => {
+    navigate('/');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <Shield className="h-6 w-6 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">{t('app.title')}</h1>
+          </div>
+          <LanguageSwitcher />
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-md mx-auto">
+            <Card className="bg-white rounded-3xl shadow-2xl border-0 overflow-hidden">
+              <CardHeader className="text-center py-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-2xl font-bold mb-2">
+                  {t('phone.title')}
+                </CardTitle>
+                <p className="text-blue-100">
+                  {t('phone.description')}
+                </p>
+              </CardHeader>
+              
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('phone.label')}
+                    </label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      placeholder="+998 90 123 45 67"
+                      className="text-lg h-12 border-2 border-gray-200 focus:border-blue-500 rounded-xl"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Button
+                      type="button"
+                      onClick={handleBack}
+                      variant="outline"
+                      className="flex-1 h-12 border-2 border-gray-200 hover:border-gray-300 rounded-xl"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      {t('back')}
+                    </Button>
+                    
+                    <Button
+                      type="submit"
+                      disabled={!phoneNumber.trim() || isLoading}
+                      className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-semibold"
+                    >
+                      {isLoading ? t('sending') : t('send.code')}
+                      {!isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default PhoneInput;

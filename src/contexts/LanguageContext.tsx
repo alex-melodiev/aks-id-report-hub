@@ -30,6 +30,23 @@ const translations = {
     'features.automatic': 'Автоматическая обработка',
     'features.automatic.description': 'Полностью автоматизированный процесс',
     
+    // Phone input page
+    'phone.title': 'Введите номер телефона',
+    'phone.description': 'Мы отправим SMS с кодом подтверждения',
+    'phone.label': 'Номер телефона',
+    'back': 'Назад',
+    'send.code': 'Отправить код',
+    'sending': 'Отправляем...',
+    
+    // OTP verification page
+    'otp.title': 'Подтвердите номер',
+    'otp.description': 'Введите код из SMS, отправленного на',
+    'resend.code': 'Отправить код повторно',
+    'resend.countdown': 'Повторная отправка через',
+    'seconds': 'сек',
+    'verify': 'Подтвердить',
+    'verifying': 'Проверяем...',
+    
     // Thank you page
     'thanks.title': 'Спасибо за идентификацию!',
     'thanks.subtitle': 'Ваша личность успешно подтверждена через MyID',
@@ -56,6 +73,23 @@ const translations = {
     'features.secure.description': 'Ma\'lumotlaringizning maksimal himoyasi',
     'features.automatic': 'Avtomatik qayta ishlash',
     'features.automatic.description': 'To\'liq avtomatlashtirilgan jarayon',
+    
+    // Phone input page
+    'phone.title': 'Telefon raqamini kiriting',
+    'phone.description': 'Tasdiqlash kodi bilan SMS yuboramiz',
+    'phone.label': 'Telefon raqami',
+    'back': 'Orqaga',
+    'send.code': 'Kod yuborish',
+    'sending': 'Yuborilmoqda...',
+    
+    // OTP verification page
+    'otp.title': 'Raqamni tasdiqlang',
+    'otp.description': 'SMS orqali yuborilgan kodni kiriting',
+    'resend.code': 'Kodni qayta yuborish',
+    'resend.countdown': 'Qayta yuborish',
+    'seconds': 'soniyadan keyin',
+    'verify': 'Tasdiqlash',
+    'verifying': 'Tekshirilmoqda...',
     
     // Thank you page
     'thanks.title': 'Identifikatsiya uchun rahmat!',
