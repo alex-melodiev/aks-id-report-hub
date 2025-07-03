@@ -11,14 +11,65 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 const PhoneInput = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const { t } = useLanguage();
   const navigate = useNavigate();
 
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-digits
+    const digits = value.replace(/\D/g, '');
+    
+    // If starts with 998, use it; otherwise add 998
+    let formattedDigits = digits;
+    if (!digits.startsWith('998')) {
+      if (digits.length > 0) {
+        formattedDigits = '998' + digits;
+      } else {
+        formattedDigits = '998';
+      }
+    }
+
+    // Apply mask: +998 90 123 45 67
+    if (formattedDigits.length <= 3) {
+      return `+${formattedDigits}`;
+    } else if (formattedDigits.length <= 5) {
+      return `+${formattedDigits.slice(0, 3)} ${formattedDigits.slice(3)}`;
+    } else if (formattedDigits.length <= 8) {
+      return `+${formattedDigits.slice(0, 3)} ${formattedDigits.slice(3, 5)} ${formattedDigits.slice(5)}`;
+    } else if (formattedDigits.length <= 10) {
+      return `+${formattedDigits.slice(0, 3)} ${formattedDigits.slice(3, 5)} ${formattedDigits.slice(5, 8)} ${formattedDigits.slice(8)}`;
+    } else {
+      return `+${formattedDigits.slice(0, 3)} ${formattedDigits.slice(3, 5)} ${formattedDigits.slice(5, 8)} ${formattedDigits.slice(8, 10)} ${formattedDigits.slice(10, 12)}`;
+    }
+  };
+
+  const validatePhoneNumber = (phone: string) => {
+    const digits = phone.replace(/\D/g, '');
+    return digits.length === 12 && digits.startsWith('998');
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formatted = formatPhoneNumber(value);
+    setPhoneNumber(formatted);
+    
+    // Clear error when user starts typing
+    if (error) {
+      setError("");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phoneNumber.trim()) return;
+    
+    if (!validatePhoneNumber(phoneNumber)) {
+      setError(t('phone.error') || "Неверный формат номера телефона");
+      return;
+    }
 
     setIsLoading(true);
+    setError("");
+    
     // Имитация отправки SMS
     setTimeout(() => {
       setIsLoading(false);
@@ -72,11 +123,16 @@ const PhoneInput = () => {
                       id="phone"
                       type="tel"
                       value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      onChange={handlePhoneChange}
                       placeholder="+998 90 123 45 67"
-                      className="text-lg h-12 border-2 border-gray-200 focus:border-blue-500 rounded-xl"
+                      className={`text-lg h-12 border-2 rounded-xl ${
+                        error ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'
+                      }`}
                       required
                     />
+                    {error && (
+                      <p className="mt-2 text-sm text-red-600">{error}</p>
+                    )}
                   </div>
 
                   <div className="flex gap-3">
