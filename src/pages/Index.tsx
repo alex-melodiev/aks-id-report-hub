@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Shield, Zap, FileText, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ConsentText from "@/components/ConsentText";
+import { ConsentText } from "@/components/ConsentText";
 
 const Index = () => {
   const { t } = useLanguage();
